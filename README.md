@@ -9,7 +9,7 @@ If you wish to repeat it 1 000 000 times or more...
 Than that is exactly tool which you are looking for!
 
 
-In 3 steps:
+In couple steps:
 
 1. Add multi-test.jar to your pom
 2. Create junit4 test case
@@ -22,6 +22,7 @@ Here is MultiTestExample.java results and code:
 === MultiTestExample done 1,000,000 time(s) in 500.0 mls (500.0 ns/try) ===  Failed count = 1,977,874 !
 
 @ConcurrentTest( maxTry = 1_000_000 )
+
 public class MultiTestExample {
 
 	int count;
