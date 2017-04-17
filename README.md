@@ -15,7 +15,7 @@ In couple steps:
 2. Create junit4 test case
 3. Add class annotation @ConcurrentTest( maxTry = 1_000_000 )
 4. Create couple methods which represent your threads annotated by @NewThread
-5. Run your test @Test 
+5. Run your test @Test with MultiTest.start(this)
 
 Here is MultiTestExample.java results and code:
 
