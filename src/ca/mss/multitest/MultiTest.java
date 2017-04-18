@@ -1,4 +1,4 @@
-package ca.mss.impl.multitest;
+package ca.mss.multitest;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.concurrent.Phaser;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import ca.mss.impl.util.UtilTimer;
+import ca.mss.util.UtilTimer;
 
 public class MultiTest {
 
