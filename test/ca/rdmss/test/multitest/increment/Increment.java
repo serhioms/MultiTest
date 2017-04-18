@@ -1,4 +1,4 @@
-package ca.mss.test.multitest.increment;
+package ca.rdmss.test.multitest.increment;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;

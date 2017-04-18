@@ -1,4 +1,4 @@
-package ca.mss.test.multitest.increment;
+package ca.rdmss.test.multitest.increment;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

@@ -1,4 +1,4 @@
-package ca.mss.multitest;
+package ca.rdmss.multitest;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

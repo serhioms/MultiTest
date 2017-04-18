@@ -1,4 +1,4 @@
-package ca.mss.util;
+package ca.rdmss.util;
 
 public class UtilTimer {
 	

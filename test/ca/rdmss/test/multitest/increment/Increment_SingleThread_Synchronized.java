@@ -1,10 +1,10 @@
-package ca.mss.test.multitest.increment;
+package ca.rdmss.test.multitest.increment;
 
 import org.junit.Test;
 
-import ca.mss.multitest.ConcurrentTest;
-import ca.mss.multitest.MultiTest;
-import ca.mss.multitest.NewThread;
+import ca.rdmss.multitest.ConcurrentTest;
+import ca.rdmss.multitest.MultiTest;
+import ca.rdmss.multitest.NewThread;
 
 @ConcurrentTest( maxTry = IncrementSuite.MAX_TRY )
 public class Increment_SingleThread_Synchronized extends Increment {

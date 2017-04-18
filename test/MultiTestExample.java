@@ -4,9 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import ca.mss.multitest.ConcurrentTest;
-import ca.mss.multitest.MultiTest;
-import ca.mss.multitest.NewThread;
+import ca.rdmss.multitest.ConcurrentTest;
+import ca.rdmss.multitest.MultiTest;
+import ca.rdmss.multitest.NewThread;
 
 @ConcurrentTest( maxTry = 1_000_000 )
 public class MultiTestExample {
