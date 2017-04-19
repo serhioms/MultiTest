@@ -140,7 +140,7 @@ public class MultiTest {
 			
 			final double ttlmls = System.currentTimeMillis() - start;
 			
-			result = String.format("=== %50s done %,d time(s) in %5.1f %3s (%5.1f %s/try) === ",
+			result = String.format("=== %50s done %,d time(s) in %5.1f %3s (%5.1f %3s/try) === ",
 					clazz.getSimpleName(), maxtry,
 					UtilTimer.timeValMls(ttlmls), UtilTimer.timeScaleMls(ttlmls),
 					UtilTimer.timeValMls(ttlmls/maxtry), UtilTimer.timeScaleMls(ttlmls/maxtry)
