@@ -22,6 +22,7 @@ Here is example code and result:
 === MultiTestExample done 1,000,000 time(s) in 500.0 mls (500.0 ns/try) ===  Failed: count = 1,977,874 !
 
 @ConcurrentTest( maxTry = 1_000_000 )
+
 public class MultiTestExample {
 
 	int count;
