@@ -21,34 +21,35 @@ Here is example code and result:
 
 === MultiTestExample done 1,000,000 time(s) in 500.0 mls (500.0 ns/try) ===  Failed: count = 1,977,874 !
 
-@ConcurrentTest( maxTry = 1_000_000 )
-public class MultiTestExample {
 
-	int count;
+	@ConcurrentTest( maxTry = 1_000_000 )
+	public class MultiTestExample {
 	
-	@NewThread
-	public void oneThread(){
-		count++;
-	}
-	
-	@NewThread
-	public void secondThread(){
-		count++;
-	}
-	
-	@Test
-	public void test() throws Throwable {
-		
-		String result = MultiTest.start(this);
-		
-		if( count != 2_000_000){
-			System.out.printf("%s Failed: count = %,d !", result, count);
-			fail("Do you really think int increment is thread safe!?");
-		} else {
-			System.out.printf("%s Ok: count = %,d !", result, count);
+		int count;
+
+		@NewThread
+		public void oneThread(){
+			count++;
+		}
+
+		@NewThread
+		public void secondThread(){
+			count++;
+		}
+
+		@Test
+		public void test() throws Throwable {
+
+			String result = MultiTest.start(this);
+
+			if( count != 2_000_000){
+				System.out.printf("%s Failed: count = %,d !", result, count);
+				fail("Do you really think int increment is thread safe!?");
+			} else {
+				System.out.printf("%s Ok: count = %,d !", result, count);
+			}
 		}
 	}
-}
 
 
 PS Everything about increment in java see here in IncrementSuite.java
