@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface NewThread {
 	
-	public boolean runLast() default false;
+	public int howMany() default 1;
 
 }

@@ -13,13 +13,8 @@ public class MultiTestExample {
 
 	int count;
 	
-	@NewThread
-	public void oneThread(){
-		count++;
-	}
-	
-	@NewThread
-	public void secondThread(){
+	@NewThread(howMany=3)
+	public void thread(){
 		count++;
 	}
 	

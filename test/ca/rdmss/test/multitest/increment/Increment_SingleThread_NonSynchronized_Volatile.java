@@ -10,14 +10,13 @@ import ca.rdmss.multitest.NewThread;
 public class Increment_SingleThread_NonSynchronized_Volatile extends Increment {
 
 	@NewThread
-	public void oneThread(){
+	public void thread(){
 		super.volatileNonSynchronizedIncrement();
 	}
 	
-	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.println( MultiTest.start(this) + super.volatilePrimiriveInt);
+		System.out.println( MultiTest.start(this) + volatilePrimiriveInt);
 	}
 
 }

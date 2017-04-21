@@ -10,14 +10,13 @@ import ca.rdmss.multitest.NewThread;
 public class Increment_SingleThread_Lock extends Increment {
 
 	@NewThread
-	public void oneThread(){
+	public void thread(){
 		super.lockIncrement();
 	}
 	
-	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.println( MultiTest.start(this) + super.primitiveInt);
+		System.out.println( MultiTest.start(this) + primitiveInt);
 	}
 
 }

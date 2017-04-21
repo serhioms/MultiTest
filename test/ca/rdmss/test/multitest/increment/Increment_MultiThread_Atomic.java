@@ -9,19 +9,14 @@ import ca.rdmss.multitest.NewThread;
 @ConcurrentTest( maxTry = IncrementSuite.MAX_TRY )
 public class Increment_MultiThread_Atomic extends Increment {
 
-	@NewThread
-	public void oneThread(){
-		super.atomicIncrement();
-	}
-	
-	@NewThread
-	public void secondThread(){
-		super.atomicIncrement();
+	@NewThread(howMany=2)
+	public void thread(){
+		atomicIncrement();
 	}
 	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.println( MultiTest.start(this) + super.atomicInteger.get());
+		System.out.println( MultiTest.start(this) + atomicInteger.get());
 	}
 
 }
