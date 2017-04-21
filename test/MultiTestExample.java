@@ -4,16 +4,16 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import ca.rdmss.multitest.ConcurrentTest;
 import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.NewThread;
+import ca.rdmss.multitest.MultiTestHelper;
+import ca.rdmss.multitest.MultiThread;
 
-@ConcurrentTest( maxTry = 1_000_000 )
+@MultiTest( repeatNo = 1_000_000 )
 public class MultiTestExample {
 
 	int count;
 	
-	@NewThread(howMany=3)
+	@MultiThread(repeatNo=3)
 	public void thread(){
 		count++;
 	}
@@ -21,7 +21,7 @@ public class MultiTestExample {
 	@Test
 	public void test() throws Throwable {
 		
-		String result = MultiTest.start(this);
+		String result = MultiTestHelper.start(this);
 		
 		if( count != 2_000_000){
 			System.out.printf("%s Failed: count = %,d !", result, count);

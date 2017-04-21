@@ -7,8 +7,12 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface NewThread {
+public @interface MultiThread {
 	
-	public int howMany() default 1;
+	public int repeatNo() default 0;
+
+	public String threadSet() default "";
+	
+	public NewInstance newInstance() default NewInstance.NA;
 
 }

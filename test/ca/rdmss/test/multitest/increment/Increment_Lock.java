@@ -4,18 +4,18 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.junit.Test;
 
-import ca.rdmss.multitest.ConcurrentTest;
 import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.NewThread;
+import ca.rdmss.multitest.MultiTestHelper;
+import ca.rdmss.multitest.MultiThread;
 
-@ConcurrentTest( maxTry = IncrementSuite.MAX_TRY )
+@MultiTest( repeatNo = IncrementSuite.MAX_TRY )
 public class Increment_Lock {
 
 	ReentrantLock lock = new ReentrantLock();
 
 	int counter;
 
-	@NewThread(howMany=IncrementSuite.MAX_THREAD)
+	@MultiThread(threadSet=IncrementSuite.MAX_THREAD)
 	public void thread(){
 		try {
 			lock.lock();
@@ -27,7 +27,7 @@ public class Increment_Lock {
 	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.printf("%s%sTotally incremented = %,d\n", MultiTest.start(this, IncrementSuite.THREAD_SET), IncrementSuite.THREAD_SET==null? " ":"\n", counter);
+		System.out.printf("%s%sTotally incremented = %,d\n", MultiTestHelper.start(this, IncrementSuite.THREAD_SET), IncrementSuite.THREAD_SET==null? " ":"\n", counter);
 	}
 
 }

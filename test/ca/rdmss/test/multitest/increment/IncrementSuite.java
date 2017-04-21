@@ -16,12 +16,12 @@ import org.junit.runners.Suite.SuiteClasses;
 public class IncrementSuite {
 	
 	final public static int MAX_TRY = 2000000; 
-	final public static int MAX_THREAD = 2;
+	final public static String MAX_THREAD = "2";
 	
 	/*
 	 * Uncomment THREAD_SET array for getting table report from 1 to 32 threads (really long time) 
 	 */
-	final public static int[] THREAD_SET = null; // new int[]{1, 2, 3, 4, 8, 9, 10, 11, 12, 16, 32};
+	final public static int[] THREAD_SET = new int[]{1, 2, 3/*, 4, 8, 9, 10, 11, 12, 16, 32*/};
 
 }
 /* 2 Threads i7-3630QM 2.4Ghz (4 core)
