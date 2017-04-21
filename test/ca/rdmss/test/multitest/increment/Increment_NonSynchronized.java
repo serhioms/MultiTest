@@ -7,16 +7,17 @@ import ca.rdmss.multitest.MultiTest;
 import ca.rdmss.multitest.NewThread;
 
 @ConcurrentTest( maxTry = IncrementSuite.MAX_TRY )
-public class Increment_SingleThread_Synchronized extends Increment {
+public class Increment_NonSynchronized {
 
-	@NewThread
+	int counter;
+
+	@NewThread(howMany=IncrementSuite.MAX_THREAD)
 	public void thread(){
-		super.synchronizedIncrement();
+		counter++;
 	}
 	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.println( MultiTest.start(this) + primitiveInt);
+		System.out.printf("%s%sTotally incremented = %,d\n", MultiTest.start(this, IncrementSuite.THREAD_SET), IncrementSuite.THREAD_SET==null? " ":"\n", counter);
 	}
-
 }

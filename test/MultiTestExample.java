@@ -31,3 +31,6 @@ public class MultiTestExample {
 		}
 	}
 }
+/*
+=== MultiTestExample done 1,000,000 time(s) in 297.0 mls (297.0  ns/try) ===  Failed: count = 2,319,740 !
+*/
