@@ -13,13 +13,8 @@ public class MultiTestExample {
 
 	int count;
 	
-	@NewThread
-	public void oneThread(){
-		count++;
-	}
-	
-	@NewThread
-	public void secondThread(){
+	@NewThread(howMany=3)
+	public void thread(){
 		count++;
 	}
 	
@@ -36,3 +31,6 @@ public class MultiTestExample {
 		}
 	}
 }
+/*
+=== MultiTestExample done 1,000,000 time(s) in 297.0 mls (297.0  ns/try) ===  Failed: count = 2,319,740 !
+*/

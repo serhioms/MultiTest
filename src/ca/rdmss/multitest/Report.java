@@ -7,8 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface NewThread {
-	
-	public int howMany() default 1;
-
+public @interface Report {
 }

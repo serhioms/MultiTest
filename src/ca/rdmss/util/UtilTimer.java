@@ -6,11 +6,33 @@ public class UtilTimer {
 	private static final double _1_000_000 = 1000000.0;
 	private static final double _1_000 = 1000.0;
 
-	public static String timeScaleMls(double mls){
-		return timeScaleNs(mls*_1_000_000);
+	public static double timeScaleMls(double mls){
+		return timeScaleNs(mls*_1_000_000)*_1_000_000;
 	}
 	
-	public static String timeScaleNs(double ns){
+	public static double timeScaleNs(double ns){
+		switch( getOrderOfMagnitude(ns)){
+		case  0: return 1.0;
+		case  1: return 1.0;
+		case  2: return 1.0;
+		case  3: return 1.0/_1_000;
+		case  4: return 1.0/_1_000;
+		case  5: return 1.0/_1_000;
+		case  6: return 1.0/_1_000_000;
+		case  7: return 1.0/_1_000_000;
+		case  8: return 1.0/_1_000_000;
+		case  9: return 1.0/_1_000_000_000;
+		case 10: return 1.0/_1_000_000_000;
+		case 11: return 1.0/_1_000_000_000;
+		default: return 1.0/_1_000_000_000;
+		}
+	}
+	
+	public static String timeUnitMls(double mls){
+		return timeUnitNs(mls*_1_000_000);
+	}
+	
+	public static String timeUnitNs(double ns){
 		switch( getOrderOfMagnitude(ns)){
 		case  0: return "ns";
 		case  1: return "ns";
