@@ -20,7 +20,7 @@ Based on java.util.concurrent.Phaser
 ```
 
 ### Using in test
-In this [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExample.java) count++ invokes 1 mln times simultaneously in 2 threads. Each cycle of start of 2 threads use the same instance of `MultiTestExample` - `this`. You have to put it in `MultiTestRule` constructor otherwise instance will be created automatically but you never get access to it vie `rule`.
+In this [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExample.java) count++ invokes 1 mln times simultaneously in 2 threads. Each cycle of start of 2 threads use the same instance of `MultiTestExample` - `this`. You have to put it in `MultiTestRule` constructor otherwise instance will be created automatically but you never get access to it.
 
 ```java
 @MultiTest(repeatNo = 1_000_000, threadSet="2")
