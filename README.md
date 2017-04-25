@@ -108,7 +108,7 @@ PS Everything about increment in java you can find here [IncrementSuite.java](ht
 
 
 ### Here is more complicated [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestCycleExample.java)
-There are 3 methods defined here: `thread1()`, `thread2()` and `thread3()`. All of them run simultaniously 1 mln time in 3 separate threads. Annotation `@MultiTest` contains `true` for new instance... It means before each of cycle of start 3 threads new `MultiTestCycleExample` object will be created! More over after each cycle the actual `a`,`b`,`c` values will be saved into map by `cycle()` method vie `@MultiCycle` annotation. Finally `Util.print()` shows map of keys, percentage and actual counters as table. 
+There are 3 methods defined here: `thread1()`, `thread2()` and `thread3()`. All of them run simultaniously 1 mln time in 3 separate threads. Annotation `@MultiTest` contains `true` for new instance... It means before each of cycle of start 3 threads new `MultiTestCycleExample` object will be created! More over after each cycle the actual `a`,`b`,`c` values will be saved into map in `cycle()` method vie `@MultiCycle` annotation. Finally `Util.print()` shows map of keys, percentage and actual counters. 
 
 ```java
 @MultiTest(repeatNo=1_000_000, newInstance=true)
@@ -167,4 +167,4 @@ The output for i7-3630QM 2.4Ghz (4 core) below:
                                              2_2_0   0.0 %           88
                                 ------------------ ------- ------------
 ```
-First of all 
+It is quite clear now why simple code running in 3 parallel threads must be synchronized. Frankly speacking I'll expect result like this a,b,c={1,2,*} where * is 0,1,2. But how come a,b,c={1,1,*}||{2,2,*}? Just think a little...
