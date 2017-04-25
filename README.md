@@ -1,5 +1,6 @@
 # MultiTest
 JUnit 4 rule and annotations to run in parallel your code in multiple threads: @MultiTest, @MultiThread, @MultyCycle
+
 Based on java.util.concurrent.Phaser
 
 ## Usage
