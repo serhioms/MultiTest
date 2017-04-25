@@ -48,4 +48,4 @@ public class MultiTestExample {
 }	
 ```
 
-PS Everything about increment in java you can find here https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java
+## Everything about increment in java you can find here [IncrementSuite.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java)
