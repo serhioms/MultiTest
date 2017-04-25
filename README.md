@@ -102,6 +102,11 @@ Threads Total      OneTry     OneTry(ns)
 Totally incremented = 90,249,773
 ```
 
+It is clear now that perfomance of you code getting lower and lower in multithreded environment! For 1 thread single increment cost 63 nano seconds. For 2 concurrent threads the cost get tripled - 187 ns, for 3 threads it is 500% more - 282 ns... But it is still more over lineral up to 8 threads. For 9 threads and more the cost grows exponentially!!!
+
+I get it through why Gurus do not advise have more threads in your application then cores per socket of your's CPU.
+
+I think about tool which runs above test to calculate maximum threads for proper initialization of executor pool...
 
 PS Everything about increment in java you can find here [IncrementSuite.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java) or in details - [IncrementSuiteTable.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuiteTable.java)
 
