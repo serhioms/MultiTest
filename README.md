@@ -20,7 +20,7 @@ Based on java.util.concurrent.Phaser
 ```
 
 ### Using in test
-In this [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExample.java) count++ invokes 1 mln times simultaniously in 2 threads. 
+In this [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExample.java) count++ invokes 1 mln times simultaneously in 2 threads. Each cycle of start of 2 threads use the same instance of `MultiTestExample` - `this`. You have to put it in `MultiTestRule` constructor otherwise instance will be created automatically but you never get access to it vie `rule`.
 
 ```java
 @MultiTest(repeatNo = 1_000_000, threadSet="2")
@@ -56,7 +56,7 @@ Here is output for i7-3630QM 2.4Ghz (4 core):
 
 
 ### Here is more detailed [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExampleTable.java)
-count++ invokes 1 mln times simultaniously in 1,2,3,4,5,6,7,8,9,10,12,16,32 threads consequently. 
+count++ invokes 1 mln times simultaneously in 1,2,3,4,5,6,7,8,9,10,12,16,32 threads consequently. Each set will run against the same `MultiTestExampleTable` object - `this`.
 
 ```java
 @MultiTest(repeatNo = 1_000_000, threadSet="1,2,3,4,5,6,7,8,9,10,12,16,32")
@@ -108,7 +108,7 @@ PS Everything about increment in java you can find here [IncrementSuite.java](ht
 
 
 ### Here is more complicated [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestCycleExample.java)
-There are 3 methods defined here: `thread1()`, `thread2()` and `thread3()`. All of them run simultaniously 1 mln time in 3 separate threads. Annotation `@MultiTest` contains `true` for new instance... It means before each of cycle of start 3 threads new `MultiTestCycleExample` object will be created! More over after each cycle the actual `a`,`b`,`c` values will be saved into map in `cycle()` method vie `@MultiCycle` annotation. Finally `Util.print()` shows map of keys, percentage and actual counters. 
+There are 3 methods defined here: `thread1()`, `thread2()` and `thread3()`. All of them run simultaneously 1 mln time in 3 separate threads. Annotation `@MultiTest` contains `true` for new instance... It means before each of cycle of start 3 threads new `MultiTestCycleExample` instance created for them! More over after each cycle the actual `a`,`b`,`c` values will save into map in `cycle()` method vie `@MultiCycle` annotation. Finally `Util.print()` shows map of keys, percentage and actual counters. 
 
 ```java
 @MultiTest(repeatNo=1_000_000, newInstance=true)
@@ -167,4 +167,4 @@ The output for i7-3630QM 2.4Ghz (4 core) below:
                                              2_2_0   0.0 %           88
                                 ------------------ ------- ------------
 ```
-It is quite clear now why simple code running in 3 parallel threads must be synchronized. Frankly speacking I'll expect result like this a,b,c={1,2,*} where * is 0,1,2. But how come a,b,c={1,1,*}||{2,2,*}? Just think a little...
+It is quite clear now why simple code running in 3 parallel threads must be synchronized. Frankly speacking I'll expect result like this `a,b,c={1,2,X}` where `X` is `0,1,2`. But how come `a,b,c={1,1,X}||{2,2,X}`? Just try to imagin...
