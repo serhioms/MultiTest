@@ -20,7 +20,7 @@ Based on java.util.concurrent.Phaser
 ```
 
 ### Using in test
-In this [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExample.java) count++ invokes 2 mln times simultaniously in 2 threads. 
+In this [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExample.java) count++ invokes 1 mln times simultaniously in 2 threads. 
 
 ```java
 @MultiTest(repeatNo = 1_000_000, threadSet="2")
@@ -53,7 +53,9 @@ Here is output for i7-3630QM 2.4Ghz (4 core):
 === MultiTestExampleRule done 1,000,000 time(s) in 266.0 mls (266.0  ns/try) ===  Failed: count = 1,932,125 !
 ```
 
-Here is more detailed [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExampleTable.java) count++ invokes 2 mln times simultaniously in 1,2,3,4,5,6,7,8,9,10,12,16,32 threads consequently. 
+
+
+Here is more detailed [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExampleTable.java) count++ invokes 1 mln times simultaniously in 1,2,3,4,5,6,7,8,9,10,12,16,32 threads consequently. 
 
 ```java
 @MultiTest(repeatNo = 1_000_000, threadSet="1,2,3,4,5,6,7,8,9,10,12,16,32")
