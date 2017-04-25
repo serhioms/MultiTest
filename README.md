@@ -47,5 +47,11 @@ public class MultiTestExample {
 	}
 }	
 ```
+Here is the output:
+
+```text
+=== MultiTestExampleRule done 1,000,000 time(s) in 266.0 mls (266.0  ns/try) ===  Failed: count = 1,932,125 !
+```
+
 
 PS Everything about increment in java you can find here [IncrementSuite.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java) or in details  [IncrementSuiteTable.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuiteTable.java)
