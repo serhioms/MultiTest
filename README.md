@@ -56,7 +56,7 @@ Here is output for i7-3630QM 2.4Ghz (4 core):
 
 
 ### Here is more detailed [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExampleTable.java)
-count++ invokes 1 mln times simultaneously in 1,2,3,4,5,6,7,8,9,10,12,16,32 threads consequently. Each set will run against the same `MultiTestExampleTable` object - `this`.
+count++ invokes 1 mln times simultaneously in 1,2,3,4,5,6,7,8,9,10,12,16,32 thread sets consequently. Each set will run against the same `MultiTestExampleTable` object - `this`.
 
 ```java
 @MultiTest(repeatNo = 1_000_000, threadSet="1,2,3,4,5,6,7,8,9,10,12,16,32")
@@ -103,7 +103,7 @@ Totally incremented = 90,249,773
 ```
 
 
-PS Everything about increment in java you can find here [IncrementSuite.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java) or in details  [IncrementSuiteTable.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuiteTable.java)
+PS Everything about increment in java you can find here [IncrementSuite.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java) or in details - [IncrementSuiteTable.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuiteTable.java)
 
 
 
