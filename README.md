@@ -24,7 +24,7 @@ In this sexample count++ invokes 2 mln times simultaniously in 2 threads.
 
 ```java
 @MultiTest(repeatNo = 1_000_000, threadSet="2")
-public class MultiTestExample {
+public class [MultiTestExample](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestExample.java) {
 
 	@Rule
 	public MultiTestRule rule = new MultiTestRule(this);
