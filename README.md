@@ -104,3 +104,67 @@ Totally incremented = 90,249,773
 
 
 PS Everything about increment in java you can find here [IncrementSuite.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java) or in details  [IncrementSuiteTable.java](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuiteTable.java)
+
+
+
+### Here is more complicated [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestCycleExample.java)
+count++ invokes 1 mln times simultaniously in 1,2,3,4,5,6,7,8,9,10,12,16,32 threads consequently. 
+
+```java
+@MultiTest(repeatNo=1_000_000, newInstance=true)
+public class MultiTestCycleExample {
+
+	@Rule
+	public MultiTestRule rule = new MultiTestRule();
+
+	int integer;
+	int a, b, c;
+
+	@MultiThread
+	public void thread1(){
+		integer = 1;
+		a = integer;
+	}
+	
+	@MultiThread
+	public void thread2(){
+		integer = 2;
+		b = integer;
+	}
+	
+	@MultiThread
+	public void thread3(){
+		c = integer;
+	}
+
+	static TestUtil util = new TestUtil();
+	
+	@MultiCycle
+	public void cycle(){
+		util.count(a+"_"+b+"_"+c);
+	}
+	
+	@Test
+	public void result(){
+		System.out.println(rule.getResult());
+		util.print();
+	}
+}	
+```
+The output for i7-3630QM 2.4Ghz (4 core) below:
+
+```text
+
+===                              MultiTestCycleExample done 1,000,000 time(s) in   2.7 sec (  2.7 mks/try) ===
+                                               Key Percent   Actual val
+                                ------------------ ------- ------------
+                                             1_2_1  34.2 %      342,169
+                                             1_2_2  31.8 %      317,806
+                                             1_1_0   0.0 %           32
+                                             1_2_0  34.0 %      339,872
+                                             1_1_1   0.0 %           21
+                                             2_2_2   0.0 %           12
+                                             2_2_0   0.0 %           88
+                                ------------------ ------- ------------
+```
+
