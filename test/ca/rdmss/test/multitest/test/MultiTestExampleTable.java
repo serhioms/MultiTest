@@ -1,7 +1,5 @@
 package ca.rdmss.test.multitest.test;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Rule;
 import org.junit.Test;
 

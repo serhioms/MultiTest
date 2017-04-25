@@ -24,9 +24,12 @@ public class TestUtil {
 		
 		System.out.println("");
 		
+		System.out.printf("%50s %7s %12s\n", "Key", "Percent", "Actual val");
+		System.out.printf("%50s %7s %12s\n", "------------------", "-------", "------------");
 		for(Entry<String, AtomicInteger> entry: results.entrySet()){
-			System.out.printf("%50s = %4.1f %% = %,12d\n", entry.getKey(), entry.getValue().get()/sum, entry.getValue().get());
+			System.out.printf("%50s %5.1f %% %,12d\n", entry.getKey(), entry.getValue().get()/sum, entry.getValue().get());
 		}
+		System.out.printf("%50s %7s %12s\n", "------------------", "-------", "------------");
 	}
 	
 	public void count(String key){
