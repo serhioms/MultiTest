@@ -33,6 +33,8 @@ public class MultiTestExample {
 	}
 	
 }
-/*
+/* i7-3630QM 2.4Ghz (4 core)
+
+
 === MultiTestExampleRule done 1,000,000 time(s) in 266.0 mls (266.0  ns/try) ===  Failed: count = 1,932,125 !
 */
