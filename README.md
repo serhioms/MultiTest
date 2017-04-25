@@ -1,55 +1,50 @@
 # MultiTest
+JUnit 4 rule and annotations to run in parallel your code in multiple threads: @MultiTest, @MultiThread, @MultyCycle
+Based on java.util.concurrent.Phaser
 
-If you really want to stress you code in multithreaded environment...
+## Usage
 
-If you need to run couple threads exactly same time...
+### Declaring dependency
+#### Maven
 
-If you wish to repeat it 1 000 000 times or more...
+```xml
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+```
 
-Than that is exactly tool which you are looking for!
+### Using in test
+In this sexample count++ invokes 2 mln times simultaniously in 2 threads. 
 
+```java
+@MultiTest(repeatNo = 1_000_000, threadSet="2")
+public class MultiTestExample {
 
-In couple steps:
+	@Rule
+	public MultiTestRule rule = new MultiTestRule(this);
 
-1. Add multi-test.jar to your pom
-2. Create junit4 test case
-3. Add class annotation @ConcurrentTest( maxTry = 1_000_000 )
-4. Create couple methods which represent your threads annotated @NewThread
-5. Run your test @Test with MultiTest.start(this)
-
-Here is example code and result:
-
-=== MultiTestExample done 1,000,000 time(s) in 500.0 mls (500.0 ns/try) ===  Failed: count = 1,977,874 !
-
-
-	@ConcurrentTest( maxTry = 1_000_000 )
-	public class MultiTestExample {
+	int count;
 	
-		int count;
-
-		@NewThread
-		public void oneThread(){
-			count++;
-		}
-
-		@NewThread
-		public void secondThread(){
-			count++;
-		}
-
-		@Test
-		public void test() throws Throwable {
-
-			String result = MultiTest.start(this);
-
-			if( count != 2_000_000){
-				System.out.printf("%s Failed: count = %,d !", result, count);
-				fail("Do you really think int increment is thread safe!?");
-			} else {
-				System.out.printf("%s Ok: count = %,d !", result, count);
-			}
+	@MultiThread
+	public void thread(){
+		count++;
+	}
+	
+	@Test
+	public void test(){
+		if( count != 2_000_000){
+			System.out.printf("%s Failed: count = %,d !", rule.getResult(), count);
+			fail("Do you really think int increment is trade safe!?");
+		} else {
+			System.out.printf("%s Ok: count = %,d !", rule.getResult(), count);
 		}
 	}
+}	
+```
 
-
-PS Everything about increment in java see here in IncrementSuite.java
+PS Everything about increment in java you can find here https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/increment/IncrementSuite.java
