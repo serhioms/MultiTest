@@ -172,4 +172,4 @@ The output for i7-3630QM 2.4Ghz (4 core) below:
                                              2_2_0   0.0 %           88
                                 ------------------ ------- ------------
 ```
-It is quite clear now why simple code running in 3 parallel threads must be synchronized. Frankly speacking I've expected result like this `a,b,c={1,2,X}` where `X=0,1,2`. But how come `a,b,c={1,1,X}||{2,2,X}`? Any idea? :)
+It is quite clear now why simple code running in 3 parallel threads must be synchronized. Frankly speacking I've expected result like this `a,b,c={1,2,X}` where `X=0,1,2`. But how come `a,b,c={1,1,X}||{2,2,X}`? Any idea? May be `volatile` will help? :)
