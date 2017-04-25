@@ -9,10 +9,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface MultiThread {
 	
-	public int repeatNo() default 0;
-
-	public String threadSet() default "";
-	
-	public NewInstance newInstance() default NewInstance.NA;
-
 }

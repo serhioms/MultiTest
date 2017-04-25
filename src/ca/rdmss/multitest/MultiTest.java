@@ -9,11 +9,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface MultiTest {
 	
-	public int repeatNo() default 0;
+	public int repeatNo() default 1;
 
-	public String threadSet() default "";
+	public String threadSet() default "1";
 	
-	public NewInstance newInstance() default NewInstance.False;
-	
-	public ExecutionOrder execute() default ExecutionOrder.Sequentially;
+	public boolean newInstance() default false;
 }

@@ -2,25 +2,29 @@ package ca.rdmss.test.multitest.increment;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.MultiTestHelper;
+import ca.rdmss.multitest.MultiTestRule;
 import ca.rdmss.multitest.MultiThread;
 
-@MultiTest( repeatNo = IncrementSuite.MAX_TRY )
+@MultiTest(repeatNo=IncrementSuite.MAX_TRY, threadSet=IncrementSuite.THREAD_SET)
 public class Increment_Atomic {
+
+	@Rule
+	public MultiTestRule rule = new MultiTestRule(this);
 
 	AtomicInteger counter = new AtomicInteger();
 
-	@MultiThread(threadSet=IncrementSuite.MAX_THREAD)
+	@MultiThread
 	public void thread(){
 		counter.incrementAndGet();
 	}
 	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.printf("%s%sTotally incremented = %,d\n", MultiTestHelper.start(this, IncrementSuite.THREAD_SET), IncrementSuite.THREAD_SET==null? " ":"\n", counter.get());
+		System.out.printf("%s%sTotally incremented = %,d\n", rule.getResult(), (rule.isTable()? "\n":" "), counter.get());
 	}
 
 }
