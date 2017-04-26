@@ -7,7 +7,6 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-import ca.rdmss.util.MultiHelper;
 import ca.rdmss.util.UtilAnnotation;
 
 public class MultiTestRule implements TestRule {
@@ -40,20 +39,20 @@ public class MultiTestRule implements TestRule {
 				repeatNo = classConfig.repeatNo();
 			} 
 
-			// Get threads
-			List<Method> multiThreads = UtilAnnotation.getAnnotatedMethods(testClass, MultiThread.class);
+			// Get jobs
+			List<Method> jobs = UtilAnnotation.getAnnotatedMethods(testClass, MultiThread.class);
 
-			// Get cycle 
-			Method multiCycle = UtilAnnotation.getAnnotatedMethod(testClass, MultiCycle.class);
+			// Get end of cycle job 
+			Method endOfCycle = UtilAnnotation.getAnnotatedMethod(testClass, MultiEndOfCycle.class);
 
-			// Get threads
-			String[] threads = threadSet.split(",");
+			// Get thread sets
+			String[] tsets = threadSet.split(",");
 
 			// Run jobs in each set of threads
-			for(String str: threads){
+			for(String str: tsets){
 				int threadNo = Integer.parseInt(str);
 				
-				helper.runCycle(threads.length, repeatNo, threadNo,  testClass, newInstance, multiThreads, multiCycle);
+				helper.runCycle(tsets.length, repeatNo, threadNo,  testClass, newInstance, jobs, endOfCycle);
 				
 				if( helper.stopCycle ){
 					break;

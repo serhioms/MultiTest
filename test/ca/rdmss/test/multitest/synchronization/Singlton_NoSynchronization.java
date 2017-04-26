@@ -3,7 +3,7 @@ package ca.rdmss.test.multitest.synchronization;
 import org.junit.Rule;
 import org.junit.Test;
 
-import ca.rdmss.multitest.MultiCycle;
+import ca.rdmss.multitest.MultiEndOfCycle;
 import ca.rdmss.multitest.MultiTest;
 import ca.rdmss.multitest.MultiTestRule;
 import ca.rdmss.multitest.MultiThread;
@@ -38,7 +38,7 @@ public class Singlton_NoSynchronization {
 
 	static TestUtil util = new TestUtil();
 	
-	@MultiCycle
+	@MultiEndOfCycle
 	public void cycle(){
 		util.count(a+"_"+b+"_"+c);
 	}
