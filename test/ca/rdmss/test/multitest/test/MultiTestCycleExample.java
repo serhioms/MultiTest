@@ -3,7 +3,7 @@ package ca.rdmss.test.multitest.test;
 import org.junit.Rule;
 import org.junit.Test;
 
-import ca.rdmss.multitest.MultiCycle;
+import ca.rdmss.multitest.MultiEndOfCycle;
 import ca.rdmss.multitest.MultiTest;
 import ca.rdmss.multitest.MultiTestRule;
 import ca.rdmss.multitest.MultiThread;
@@ -37,7 +37,7 @@ public class MultiTestCycleExample {
 
 	static TestUtil util = new TestUtil();
 	
-	@MultiCycle
+	@MultiEndOfCycle
 	public void cycle(){
 		util.count(a+"_"+b+"_"+c);
 	}

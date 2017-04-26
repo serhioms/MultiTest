@@ -1,9 +1,11 @@
-package ca.rdmss.util;
+package ca.rdmss.multitest;
 
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import ca.rdmss.util.UtilTimer;
 
 public class MultiHelper {
 
@@ -33,7 +35,7 @@ public class MultiHelper {
 	}
 
 	public void runCycle(int _seriesNo, int _repeatNo, int _threadNo, Class<?> _testClass,  
-			final boolean newInstance, final List<Method> multiThreads, final Method multiCycle) throws Throwable {
+			final boolean newInstance, final List<Method> jobs, final Method endOfCycle) throws Throwable {
 
 		// Need for reports etc
 		this.seriesNo = _seriesNo;
@@ -41,16 +43,16 @@ public class MultiHelper {
 		this.threadNo = _threadNo;
 		this.testClass = _testClass;
 
-		final int maxthreads = threadNo * multiThreads.size();
+		final int maxthreads = threadNo * jobs.size();
 		
 		final Phaser phaser = new Phaser(maxthreads);
 		Thread[] threads = new Thread[maxthreads];
 		final AtomicInteger counter = new AtomicInteger(0);
 
 		for (int h=0, t=0; h < threadNo; h++) {
-			for (int r=0, maxr = multiThreads.size(); r < maxr; r++) {
+			for (int r=0, maxr = jobs.size(); r < maxr; r++) {
 				
-				final Method method = multiThreads.get(r);
+				final Method method = jobs.get(r);
 
 				Thread thread = new Thread(new Runnable() {
 
@@ -75,9 +77,9 @@ public class MultiHelper {
 								
 								// cycle method must be run at current cycle end 
 								
-								if (multiCycle != null) {
+								if (endOfCycle != null) {
 									try {
-										multiCycle.invoke(testInstance);
+										endOfCycle.invoke(testInstance);
 									} catch (Throwable e) {
 										stopCycle = true;
 										e.printStackTrace();
