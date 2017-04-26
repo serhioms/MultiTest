@@ -7,7 +7,7 @@ import ca.rdmss.multitest.MultiEndOfCycle;
 import ca.rdmss.multitest.MultiTest;
 import ca.rdmss.multitest.MultiTestRule;
 import ca.rdmss.multitest.MultiThread;
-import ca.rdmss.test.util.TestUtil;
+import ca.rdmss.util.UtilTest;
 
 @MultiTest(repeatNo=1_000_000, newInstance=true)
 public class MultiTestCycleExample {
@@ -35,7 +35,7 @@ public class MultiTestCycleExample {
 		c = integer;
 	}
 
-	static TestUtil util = new TestUtil();
+	static UtilTest util = new UtilTest();
 	
 	@MultiEndOfCycle
 	public void cycle(){

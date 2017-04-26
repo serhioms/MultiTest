@@ -8,7 +8,7 @@ import ca.rdmss.multitest.MultiTest;
 import ca.rdmss.multitest.MultiTestRule;
 import ca.rdmss.multitest.MultiThread;
 import ca.rdmss.test.multitest.synchronization.impl.Singlton;
-import ca.rdmss.test.util.TestUtil;
+import ca.rdmss.util.UtilTest;
 
 @MultiTest(repeatNo=1_000, newInstance=true)
 public class Singlton_NoSynchronization {
@@ -36,7 +36,7 @@ public class Singlton_NoSynchronization {
 		c = test.getNoSynchronization();
 	}
 
-	static TestUtil util = new TestUtil();
+	static UtilTest util = new UtilTest();
 	
 	@MultiEndOfCycle
 	public void cycle(){

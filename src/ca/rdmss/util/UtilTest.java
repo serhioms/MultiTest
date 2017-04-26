@@ -1,11 +1,11 @@
-package ca.rdmss.test.util;
+package ca.rdmss.util;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TestUtil {
+public class UtilTest {
 	
 	private Map<String, AtomicInteger> results = new HashMap<String, AtomicInteger>(32);
 
