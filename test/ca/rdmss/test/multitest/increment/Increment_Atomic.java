@@ -24,7 +24,7 @@ public class Increment_Atomic {
 	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.printf("%s%sTotally incremented = %,d\n", rule.getResult(), (rule.isTable()? "\n":" "), counter.get());
+		System.out.printf("%s%sTotally incremented = %,d\n", rule.getReport(), (rule.isTable()? "\n":" "), counter.get());
 	}
 
 }

@@ -25,10 +25,10 @@ public class MultiTestExample {
 	@Test
 	public void test(){
 		if( count != 2_000_000){
-			System.out.printf("%s Failed: count = %,d !", rule.getResult(), count);
+			System.out.printf("%s Failed: count = %,d !", rule.getReport(), count);
 			fail("Do you really think int increment is trade safe!?");
 		} else {
-			System.out.printf("%s Ok: count = %,d !", rule.getResult(), count);
+			System.out.printf("%s Ok: count = %,d !", rule.getReport(), count);
 		}
 	}
 	

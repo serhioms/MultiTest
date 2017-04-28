@@ -25,7 +25,7 @@ public class Increment_Synchronized_Volatile {
 	
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, InterruptedException {
-		System.out.printf("%s%sTotally incremented = %,d\n", rule.getResult(), (rule.isTable()? "\n":" "), counter);
+		System.out.printf("%s%sTotally incremented = %,d\n", rule.getReport(), (rule.isTable()? "\n":" "), counter);
 	}
 
 }
