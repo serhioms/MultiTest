@@ -17,7 +17,7 @@ import ca.rdmss.util.UtilAnnotation;
 
 public class MultiTestRule implements TestRule {
 
-	final private MultiHelper helper; 
+	final public MultiHelper helper; 
 
 	public MultiTestRule() {
 		helper = new MultiHelper();
@@ -86,8 +86,12 @@ public class MultiTestRule implements TestRule {
 		return base;
 	}
 
+	public String getReport() {
+		return helper.getReport();
+	}
+
 	public String getResult() {
-		return helper.getResult();
+		return helper.result;
 	}
 
 	public boolean isTable() {

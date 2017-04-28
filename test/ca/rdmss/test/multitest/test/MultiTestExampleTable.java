@@ -22,7 +22,7 @@ public class MultiTestExampleTable {
 	
 	@Test
 	public void test(){
-		System.out.printf("%s\nTotally incremented = %,d\n", rule.getResult(), count);
+		System.out.printf("%s\nTotally incremented = %,d\n", rule.getReport(), count);
 	}
 	
 }

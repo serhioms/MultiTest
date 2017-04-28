@@ -42,7 +42,7 @@ public class MultiTestCycleExample {
 	
 	@Test
 	public void result(){
-		System.out.println(rule.getResult());
+		System.out.println(rule.getReport());
 		UtilTest.print();
 	}
 }

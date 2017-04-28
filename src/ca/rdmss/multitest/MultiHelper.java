@@ -160,7 +160,7 @@ public class MultiHelper {
 		return invokeCounter.get() != (maxthreads * repeatNo);
 	}
 
-	public String getResult() {
+	public String getReport() {
 		if (seriesNo == 1) {
 			return result;
 		} else {
