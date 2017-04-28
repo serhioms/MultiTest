@@ -22,7 +22,8 @@ public class MultiTestExampleTable {
 	
 	@Test
 	public void test(){
-		System.out.printf("%s\nTotally incremented = %,d\n", rule.getReport(), count);
+		System.out.println(rule.getReport());
+		System.out.printf("Totally incremented = %,d\n", count);
 	}
 	
 }
@@ -31,19 +32,19 @@ public class MultiTestExampleTable {
 === MultiTestExampleTable done 1,000,000 time(s) ===
 Threads Total      OneTry     OneTry(ns)
 ------- ---------- ---------- ----------
-1       63.0   mls 63.0    ns     63.000
-2       187.0  mls 187.0   ns    187.000
-3       282.0  mls 282.0   ns    282.000
-4       359.0  mls 359.0   ns    359.000
-5       500.0  mls 500.0   ns    500.000
-6       533.0  mls 533.0   ns    533.000
-7       641.0  mls 641.0   ns    641.000
-8       750.0  mls 750.0   ns    750.000
-9       6.2    sec 6.2    mks   6170.000
-10      8.0    sec 8.0    mks   8034.000
-12      9.1    sec 9.1    mks   9056.000
-16      5.7    sec 5.7    mks   5708.000
-32      13.4   sec 13.4   mks  13422.000
+1       46.0   mls 46.0    ns     46.000
+2       178.0  mls 178.0   ns    178.000
+3       267.0  mls 267.0   ns    267.000
+4       370.0  mls 370.0   ns    370.000
+5       424.0  mls 424.0   ns    424.000
+6       510.0  mls 510.0   ns    510.000
+7       627.0  mls 627.0   ns    627.000
+8       772.0  mls 772.0   ns    772.000
+9       9.5    sec 9.5    mks   9497.000
+10      11.9   sec 11.9   mks  11855.000
+12      17.3   sec 17.3   mks  17302.000
+16      6.6    sec 6.6    mks   6630.000
+32      17.6   sec 17.6   mks  17630.000
 ------- ---------- ---------- ----------
-Totally incremented = 90,249,773
+Totally incremented = 88,783,987
 */

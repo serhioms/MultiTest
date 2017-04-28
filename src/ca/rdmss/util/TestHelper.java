@@ -5,15 +5,15 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class UtilTest {
+public class TestHelper {
 	
-	final static public Map<String, AtomicInteger> results = new ConcurrentHashMap<String, AtomicInteger>(32);
+	final public Map<String, AtomicInteger> results = new ConcurrentHashMap<String, AtomicInteger>(32);
 
-	static public void clean(){
+	public void clean(){
 		results.clear();
 	}
 	
-	static public int getTotal(){
+	public int getTotal(){
 		int ttl = 0;
 		
 		for(AtomicInteger counter: results.values()){
@@ -23,7 +23,7 @@ public class UtilTest {
 		return ttl;
 	}
 	
-	static public String getResult(){
+	public String getReport(){
 		String result = "";
 		
 		double ttl = getTotal() / 100.0;
@@ -40,14 +40,10 @@ public class UtilTest {
 		return result;
 	}
 	
-	static public void print(){
-		System.out.println(getResult());
-	}
-	
-	static public void count(String key){
+	public void count(String key){
 		AtomicInteger counter = results.get(key);
 		if( counter == null ){
-			synchronized(UtilTest.class){
+			synchronized(TestHelper.class){
 				counter = results.get(key);
 				if( counter == null ){
 					counter = new AtomicInteger(0);

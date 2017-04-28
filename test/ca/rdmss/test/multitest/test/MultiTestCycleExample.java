@@ -7,10 +7,12 @@ import ca.rdmss.multitest.annotation.MultiEndOfCycle;
 import ca.rdmss.multitest.annotation.MultiTest;
 import ca.rdmss.multitest.annotation.MultiThread;
 import ca.rdmss.multitest.junitrule.MultiTestRule;
-import ca.rdmss.util.UtilTest;
+import ca.rdmss.util.TestHelper;
 
 @MultiTest(repeatNo=1_000_000, newInstance=true)
 public class MultiTestCycleExample {
+
+	static TestHelper test = new TestHelper();
 
 	@Rule
 	public MultiTestRule rule = new MultiTestRule();
@@ -37,13 +39,13 @@ public class MultiTestCycleExample {
 
 	@MultiEndOfCycle
 	public void cycle(){
-		UtilTest.count(a+"_"+b+"_"+c);
+		test.count(a+"_"+b+"_"+c);
 	}
 	
 	@Test
 	public void result(){
 		System.out.println(rule.getReport());
-		UtilTest.print();
+		System.out.println(test.getReport());
 	}
 }
 /* i7-3630QM 2.4Ghz (4 core)
