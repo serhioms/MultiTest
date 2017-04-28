@@ -5,9 +5,9 @@ import static org.junit.Assert.fail;
 import org.junit.Rule;
 import org.junit.Test;
 
-import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.MultiTestRule;
-import ca.rdmss.multitest.MultiThread;
+import ca.rdmss.multitest.annotation.MultiTest;
+import ca.rdmss.multitest.annotation.MultiThread;
+import ca.rdmss.multitest.junitrule.MultiTestRule;
 
 @MultiTest(repeatNo = 1_000_000, threadSet="2")
 public class MultiTestExample {

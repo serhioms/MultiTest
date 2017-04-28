@@ -3,6 +3,7 @@ package ca.rdmss.multitest;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.Phaser;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import ca.rdmss.util.UtilTimer;
@@ -12,11 +13,13 @@ public class MultiHelper {
 	final static public boolean CONTINUE = false;
 	final static public boolean EXIT = true;
 
-	volatile private Object testInstance;
-	volatile public boolean stopCycle = false;
+	public Object testInstance;
 
-	// Report 
-	private String result = "";
+	final public AtomicInteger invokeCounter = new AtomicInteger(0);
+	final public AtomicInteger threadCounter = new AtomicInteger(0);
+	
+	// Report
+	public String result = "";
 	private String timeUnit = null;
 	private double timeScale = 0;
 
@@ -34,9 +37,12 @@ public class MultiHelper {
 		this.testInstance = testInstance;
 	}
 
-	public void runCycle(int _seriesNo, int _repeatNo, int _threadNo, Class<?> _testClass,  
-			final boolean newInstance, final List<Method> jobs, final Method endOfCycle) throws Throwable {
+	public boolean runCycle(int _seriesNo, int _repeatNo, int _threadNo, Class<?> _testClass, final boolean newInstance,
+			final List<Method> jobs, final Method endOfCycle) throws Throwable {
 
+		invokeCounter.set(0);
+		threadCounter.set(0);
+		
 		// Need for reports etc
 		this.seriesNo = _seriesNo;
 		this.repeatNo = _repeatNo;
@@ -44,14 +50,14 @@ public class MultiHelper {
 		this.testClass = _testClass;
 
 		final int maxthreads = threadNo * jobs.size();
-		
-		final Phaser phaser = new Phaser(maxthreads);
-		Thread[] threads = new Thread[maxthreads];
-		final AtomicInteger counter = new AtomicInteger(0);
 
-		for (int h=0, t=0; h < threadNo; h++) {
-			for (int r=0, maxr = jobs.size(); r < maxr; r++) {
-				
+		final Phaser phaser = new Phaser(maxthreads);
+		
+		Thread[] threads = new Thread[maxthreads];
+		
+		for (int h = 0, t = 0; h < threadNo; h++) {
+			for (int r = 0, maxr = jobs.size(); r < maxr; r++) {
+
 				final Method method = jobs.get(r);
 
 				Thread thread = new Thread(new Runnable() {
@@ -59,54 +65,51 @@ public class MultiHelper {
 					@Override
 					public void run() {
 						int cnt = -1;
-						
-						for (int n=0; n < repeatNo; n++) {
+
+						for (int n = 0; n < repeatNo; n++) {
 							try {
 								// run task
 								method.invoke(testInstance);
 								// count task done
-								cnt = counter.incrementAndGet();
+								cnt = invokeCounter.incrementAndGet();
 							} catch (Throwable e) {
-								stopCycle = true;
 								e.printStackTrace();
+								return;
 							}
 
-							// catch last thread ends in current cycle
-							
-							if (cnt % maxthreads == 0) {
-								
-								// cycle method must be run at current cycle end 
-								
-								if (endOfCycle != null) {
+							// cycle method must be run at the end of cycle
+
+							if (endOfCycle != null) {
+								if (cnt % maxthreads == 0) { 
+									// catch last thread
 									try {
 										endOfCycle.invoke(testInstance);
 									} catch (Throwable e) {
-										stopCycle = true;
 										e.printStackTrace();
+										return;
 									}
 								}
+							}
 
-								// create new instance if required before next cycle
+							// create new instance if required before next cycle
 
-								if (newInstance) {
+							if (newInstance) {
+								if (cnt % maxthreads == 0) { 
+									// catch last thread
 									try {
 										testInstance = testClass.newInstance();
 									} catch (Throwable e) {
-										stopCycle = true;
 										e.printStackTrace();
+										return;
 									}
 								}
 							}
 
 							// wait for all threads here
 							phaser.arriveAndAwaitAdvance();
-
-							// Check if stop event happen
-							if (stopCycle) {
-								counter.set(maxthreads * repeatNo);
-								return;
-							}
 						}
+						
+						threadCounter.incrementAndGet();
 					}
 				});
 				threads[t++] = thread;
@@ -128,8 +131,8 @@ public class MultiHelper {
 
 		// wait for all done
 
-		for (int max = maxthreads * repeatNo; counter.get() < max; Thread.sleep(10L))
-			;
+		for (int max=maxthreads; threadCounter.get() < max; )
+			TimeUnit.NANOSECONDS.sleep(50L);
 
 		final double ttlmls = System.currentTimeMillis() - start;
 
@@ -153,18 +156,21 @@ public class MultiHelper {
 					UtilTimer.timeUnitMls(ttlmls), UtilTimer.timeValMls(ttlmls / repeatNo),
 					UtilTimer.timeUnitMls(ttlmls / repeatNo), (ttlmls / repeatNo) * timeScale);
 		}
+
+		return invokeCounter.get() != (maxthreads * repeatNo);
 	}
 
 	public String getResult() {
-		if (seriesNo > 1) {
+		if (seriesNo == 1) {
+			return result;
+		} else {
 			// Add header for series of threads
 			return String.format(
-					"\n=== %s done %,d time(s) ===" + "\n%-7s %-9s %-11s %s(%s)"
-							+ "\n------- ---------- ---------- ----------",
-					testClass.getSimpleName(), repeatNo, "Threads", "Total", " OneTry", "OneTry", timeUnit) + result
+					  "\n=== %s done %,d time(s) ===" + "\n%-7s %-9s %-11s %s(%s)"
+					+ "\n------- ---------- ---------- ----------",
+					testClass.getSimpleName(), repeatNo, "Threads", "Total", " OneTry", "OneTry", timeUnit) 
+					+ result
 					+ "\n------- ---------- ---------- ----------";
-		} else {
-			return result;
 		}
 	}
 

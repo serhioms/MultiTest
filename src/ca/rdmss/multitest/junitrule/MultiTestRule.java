@@ -1,4 +1,4 @@
-package ca.rdmss.multitest;
+package ca.rdmss.multitest.junitrule;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -7,6 +7,12 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
+import ca.rdmss.multitest.MultiHelper;
+import ca.rdmss.multitest.annotation.MultiBefore;
+import ca.rdmss.multitest.annotation.MultiEndOfCycle;
+import ca.rdmss.multitest.annotation.MultiEndOfSet;
+import ca.rdmss.multitest.annotation.MultiTest;
+import ca.rdmss.multitest.annotation.MultiThread;
 import ca.rdmss.util.UtilAnnotation;
 
 public class MultiTestRule implements TestRule {
@@ -14,11 +20,11 @@ public class MultiTestRule implements TestRule {
 	final private MultiHelper helper; 
 
 	public MultiTestRule() {
-		this.helper = new MultiHelper();
+		helper = new MultiHelper();
 	}
 
 	public MultiTestRule(Object testInstance) {
-		this.helper = new MultiHelper(testInstance);
+		helper = new MultiHelper(testInstance);
 	}
 
 	@Override
@@ -48,14 +54,30 @@ public class MultiTestRule implements TestRule {
 			// Get thread sets
 			String[] tsets = threadSet.split(",");
 
+			// Get end of set 
+			Method endOfSet = UtilAnnotation.getAnnotatedMethod(testClass, MultiEndOfSet.class);
+
+			
+			// Get and start @MultiBefore first 
+			Method before = UtilAnnotation.getAnnotatedMethod(testClass, MultiBefore.class);
+			if (before != null) {
+				before.invoke(helper.testInstance);
+			}
+			
 			// Run jobs in each set of threads
 			for(String str: tsets){
 				int threadNo = Integer.parseInt(str);
-				
-				helper.runCycle(tsets.length, repeatNo, threadNo,  testClass, newInstance, jobs, endOfCycle);
-				
-				if( helper.stopCycle ){
+				if( helper.runCycle(tsets.length, repeatNo, threadNo,  testClass, newInstance, jobs, endOfCycle) ){
 					break;
+				}
+				// cycle method must be run at the end of cycle
+
+				if (endOfSet != null) {
+					try {
+						endOfSet.invoke(helper.testInstance);
+					} catch (Throwable e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		} catch(Throwable t){
@@ -70,5 +92,9 @@ public class MultiTestRule implements TestRule {
 
 	public boolean isTable() {
 		return helper.seriesNo > 1;
+	}
+
+	public int getThreadNo() {
+		return helper.threadNo;
 	}
 }

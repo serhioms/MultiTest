@@ -5,9 +5,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Rule;
 import org.junit.Test;
 
-import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.MultiTestRule;
-import ca.rdmss.multitest.MultiThread;
+import ca.rdmss.multitest.annotation.MultiTest;
+import ca.rdmss.multitest.annotation.MultiThread;
+import ca.rdmss.multitest.junitrule.MultiTestRule;
 
 @MultiTest(repeatNo=IncrementSuite.MAX_TRY, threadSet=IncrementSuite.THREAD_SET)
 public class Increment_Atomic {
