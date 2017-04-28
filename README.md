@@ -113,7 +113,7 @@ PS Everything about increment in java you can find here [IncrementSuite.java](ht
 
 
 ### Here is more complicated [example](https://github.com/serhioms/MultiTest/blob/master/test/ca/rdmss/test/multitest/test/MultiTestCycleExample.java)
-There are 3 methods defined here: `thread1()`, `thread2()` and `thread3()`. All of them run simultaneously 1 mln time in 3 separate threads. Annotation `@MultiTest` contains `true` for new instance... It means before each of cycle of start 3 threads new `MultiTestCycleExample` instance created for them! More over after each cycle the actual `a,b,c` values will save into map in `cycle()` method vie `@MultiEndOfCycle` annotation. Finally `Util.print()` shows map of keys, percentage and actual counters. 
+There are 3 methods defined here: `thread1()`, `thread2()` and `thread3()`. All of them run simultaneously 1 mln time in 3 separate threads. Annotation `@MultiTest` contains `true` for new instance... It means before each of cycle of start 3 threads new `MultiTestCycleExample` instance created for them! More over after each cycle the actual `a,b,c` values will save into map in `endOfCycle()` method vie `@MultiEndOfCycle` annotation. Finally `Util.print()` shows map of keys, percentage and actual counters. 
 
 ```java
 @MultiTest(repeatNo=1_000_000, newInstance=true)
@@ -145,7 +145,7 @@ public class MultiTestCycleExample {
 	static TestUtil util = new TestUtil();
 	
 	@MultiEndOfCycle
-	public void cycle(){
+	public void endOfCycle(){
 		util.count(a+"_"+b+"_"+c);
 	}
 	
