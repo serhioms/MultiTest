@@ -173,3 +173,33 @@ The output for i7-3630QM 2.4Ghz (4 core) below:
                                 ------------------ ------- ------------
 ```
 It is quite clear now why simple code running in 3 parallel threads must be synchronized. Frankly speacking I've expected result like this `a,b,c={1,2,X}` where `X=0,1,2`. But how come `a,b,c={1,1,X}||{2,2,X}`? Any idea? May be `volatile` will help? :)
+
+
+## Annotations
+
+### @MultiTest - class level
+
+Contains 3 parameters:
+
+repeatNo = 1 by default. 
+threadSet = "1" be default.
+newInstance = false by default.
+
+### @MultiThread - method level
+
+No parameters.
+
+### @MultyEndOfCycle - method level
+
+No parameters.
+
+### @MultyEndOfSet - method level
+
+No parameters.
+
+### @MultyBefore - method level
+
+No parameters.
+
+
+
