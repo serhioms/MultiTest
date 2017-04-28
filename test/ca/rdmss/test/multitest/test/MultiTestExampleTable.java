@@ -3,9 +3,9 @@ package ca.rdmss.test.multitest.test;
 import org.junit.Rule;
 import org.junit.Test;
 
-import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.MultiTestRule;
-import ca.rdmss.multitest.MultiThread;
+import ca.rdmss.multitest.annotation.MultiTest;
+import ca.rdmss.multitest.annotation.MultiThread;
+import ca.rdmss.multitest.junitrule.MultiTestRule;
 
 @MultiTest(repeatNo = 1_000_000, threadSet="1,2,3,4,5,6,7,8,9,10,12,16,32")
 public class MultiTestExampleTable {

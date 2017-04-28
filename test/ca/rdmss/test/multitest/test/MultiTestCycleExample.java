@@ -3,10 +3,10 @@ package ca.rdmss.test.multitest.test;
 import org.junit.Rule;
 import org.junit.Test;
 
-import ca.rdmss.multitest.MultiEndOfCycle;
-import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.MultiTestRule;
-import ca.rdmss.multitest.MultiThread;
+import ca.rdmss.multitest.annotation.MultiEndOfCycle;
+import ca.rdmss.multitest.annotation.MultiTest;
+import ca.rdmss.multitest.annotation.MultiThread;
+import ca.rdmss.multitest.junitrule.MultiTestRule;
 import ca.rdmss.util.UtilTest;
 
 @MultiTest(repeatNo=1_000_000, newInstance=true)
@@ -35,17 +35,15 @@ public class MultiTestCycleExample {
 		c = integer;
 	}
 
-	static UtilTest util = new UtilTest();
-	
 	@MultiEndOfCycle
 	public void cycle(){
-		util.count(a+"_"+b+"_"+c);
+		UtilTest.count(a+"_"+b+"_"+c);
 	}
 	
 	@Test
 	public void result(){
 		System.out.println(rule.getResult());
-		util.print();
+		UtilTest.print();
 	}
 }
 /* i7-3630QM 2.4Ghz (4 core)

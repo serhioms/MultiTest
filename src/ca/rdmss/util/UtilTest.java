@@ -1,44 +1,60 @@
 package ca.rdmss.util;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class UtilTest {
 	
-	private Map<String, AtomicInteger> results = new HashMap<String, AtomicInteger>(32);
+	final static public Map<String, AtomicInteger> results = new ConcurrentHashMap<String, AtomicInteger>(32);
 
-	public void clean(){
+	static public void clean(){
 		results.clear();
 	}
 	
-	public void print(){
-		double sum = 0;
+	static public int getTotal(){
+		int ttl = 0;
 		
 		for(AtomicInteger counter: results.values()){
-			sum += counter.get();
+			ttl += counter.get();
 		}
+
+		return ttl;
+	}
+	
+	static public String getResult(){
+		String result = "";
 		
-		sum /= 100;
+		double ttl = getTotal() / 100.0;
 		
 		System.out.println("");
 		
-		System.out.printf("%50s %7s %12s\n", "Key", "Percent", "Actual val");
-		System.out.printf("%50s %7s %12s\n", "------------------", "-------", "------------");
+		result += String.format("%50s %7s %12s\n", "Key", "Percent", "Actual val");
+		result += String.format("%50s %7s %12s\n", "------------------", "-------", "------------");
 		for(Entry<String, AtomicInteger> entry: results.entrySet()){
-			System.out.printf("%50s %5.1f %% %,12d\n", entry.getKey(), entry.getValue().get()/sum, entry.getValue().get());
+			result += String.format("%50s %5.1f %% %,12d\n", entry.getKey(), entry.getValue().get()/ttl, entry.getValue().get());
 		}
-		System.out.printf("%50s %7s %12s\n", "------------------", "-------", "------------");
+		result += String.format("%50s %7s %12s\n", "------------------", "-------", "------------");
+		
+		return result;
 	}
 	
-	public void count(String key){
+	static public void print(){
+		System.out.println(getResult());
+	}
+	
+	static public void count(String key){
 		AtomicInteger counter = results.get(key);
 		if( counter == null ){
-			counter = new AtomicInteger(1);
-			results.put(key,  counter);
-		} else {
-			counter.incrementAndGet();
+			synchronized(UtilTest.class){
+				counter = results.get(key);
+				if( counter == null ){
+					counter = new AtomicInteger(0);
+					results.put(key,  counter);
+				}
+			}
 		}
+		counter.incrementAndGet();
 	}
 }

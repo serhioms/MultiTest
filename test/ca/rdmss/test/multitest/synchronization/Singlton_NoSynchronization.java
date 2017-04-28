@@ -3,10 +3,10 @@ package ca.rdmss.test.multitest.synchronization;
 import org.junit.Rule;
 import org.junit.Test;
 
-import ca.rdmss.multitest.MultiEndOfCycle;
-import ca.rdmss.multitest.MultiTest;
-import ca.rdmss.multitest.MultiTestRule;
-import ca.rdmss.multitest.MultiThread;
+import ca.rdmss.multitest.annotation.MultiEndOfCycle;
+import ca.rdmss.multitest.annotation.MultiTest;
+import ca.rdmss.multitest.annotation.MultiThread;
+import ca.rdmss.multitest.junitrule.MultiTestRule;
 import ca.rdmss.test.multitest.synchronization.impl.Singlton;
 import ca.rdmss.util.UtilTest;
 
