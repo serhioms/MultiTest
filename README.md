@@ -182,8 +182,10 @@ It is quite clear now why simple code running in 3 parallel threads must be sync
 Define 3 parameters:
 
 repeatNo = 1 by default. How many cycles must be done for each set. 
+
 threadSet = "1" by default. How many threads must be run in parallel in each cycle. You can define many sets as "1,2,4,8,16" - means run repeatNo times 1 thread, 2 threads, ..., 16 threads in parallel.
-newInstance = false by default. Should new instance be created before each cycle. False means that all cycles for all threadSet runs against same instance. True means that for each cycle of each threadSet new instance be created.
+
+newInstance = false by default. Should new instance be created before each cycle. False means that all cycles for all threadSet runs against same instance. True means that before each cycle new instance of @MultiTest class be created.
 
 ### @MultiThread - method level
 
@@ -191,15 +193,15 @@ No parameters. Annotated method become a separate thread. Total amount of runnin
 
 ### @MultyEndOfCycle - method level
 
-No parameters. Annotated method invokes at the end of each cycle. If repeatNo=100 then method annotated by @MultyEndOfCycle invokes 100 times for each of threadSet.
+No parameters. Annotated method invokes at the end of each cycle. If repeatNo=100 then @MultyEndOfCycle method invokes 100 times for each threadSet.
 
 ### @MultyEndOfSet - method level
 
-No parameters. Annotated method invokes at the end of each thread set.
+No parameters. Annotated method invokes at the end of each thread set. If threadSet="1,2,4,8,16" then @MultyEndOfSet method invokes 5 times.
 
 ### @MultyBefore - method level
 
-No parameters. Annotated method invokes just once before start the test.
+No parameters. Annotated method invokes just once before whole test.
 
 
 
