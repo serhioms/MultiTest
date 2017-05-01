@@ -203,7 +203,7 @@ No parameters. Annotated method invokes at the end of each thread set. If thread
 
 No parameters. Annotated method invokes just once before whole test.
 
-## MultiTest diagram
+## MultiTest execution diagram
 
 ![alt text](https://github.com/serhioms/MultiTest/blob/master/result/MultiTest%20diagram.png)
 
