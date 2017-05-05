@@ -58,7 +58,7 @@ public class MultiHelper {
 		for (int h = 0, t = 0; h < threadNo; h++) {
 			for (int r = 0, maxr = jobs.size(); r < maxr; r++) {
 
-				final Method method = jobs.get(r);
+				final Method job = jobs.get(r);
 
 				Thread thread = new Thread(new Runnable() {
 
@@ -69,7 +69,7 @@ public class MultiHelper {
 						for (int n = 0; n < repeatNo; n++) {
 							try {
 								// run task
-								method.invoke(testInstance);
+								job.invoke(testInstance);
 								// count task done
 								cnt = invokeCounter.incrementAndGet();
 							} catch (Throwable e) {
@@ -111,7 +111,7 @@ public class MultiHelper {
 						
 						threadCounter.incrementAndGet();
 					}
-				});
+				}, String.format("%s.%s", job.getName(), h));
 				threads[t++] = thread;
 			}
 		}
