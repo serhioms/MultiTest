@@ -111,7 +111,7 @@ public class MultiHelper {
 						
 						threadCounter.incrementAndGet();
 					}
-				}, job.getName());
+				}, String.format("%s.%s", job.getName(), h));
 				threads[t++] = thread;
 			}
 		}
