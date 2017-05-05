@@ -102,7 +102,7 @@ Threads Total      OneTry     OneTry(ns)
 Totally incremented = 90,249,773
 ```
 
-It is clear now that perfomance of you code getting lower and lower in multithreded environment! For 1 thread single increment cost 63 nano seconds. For 2 concurrent threads the cost get tripled - 187 ns, for 3 threads it is 500% more - 282 ns... But it is still more over lineral up to 8 threads. For 9 threads and more the cost grows exponentially!!!
+It is clear now that perfomance of you code getting lower and lower in multithreded environment due to contention for increment of integer variable! For 1 thread single increment cost 63 nano seconds. For 2 concurrent threads the cost get tripled - 187 ns, for 3 threads it is 500% more - 282 ns... But it is still more over lineral up to 8 threads. For 9 threads and more the cost grows exponentially!!!
 
 I get it through why Gurus do not advise have more threads in your application then cores per socket of your's CPU.
 
