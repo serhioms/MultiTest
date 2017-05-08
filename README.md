@@ -1,5 +1,7 @@
 # MultiTest
-JUnit 4 rule and annotations to run in parallel your code in multiple threads: @MultiTest, @MultiThread, @MultyEndOfCycle, @MultyEndOfSet, @MultyBefore. What is special - all the threads will start simultaniously and run till the end of each thread. The cycle will repeat number of times again and again. This approach guarantee highest contention to access shared properties. 
+JUnit 4 rule and annotations to run in parallel your code in multiple threads: @MultiTest, @MultiThread, @MultyEndOfCycle, @MultyEndOfSet, @MultyBefore. 
+
+What is special - all the threads will start simultaniously and run till the end of each thread. The cycle will repeat number of times again and again. This approach guarantee highest contention to access shared properties. 
 
 Also MultiTest generates statistics for each case as a simple table with time spent for the full cycle per thread set.
 
