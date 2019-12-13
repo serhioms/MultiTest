@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ca.rdmss</groupId>
 	<artifactId>multi-test</artifactId>
-	<version>1.2.0</version>
+	<version>1.4.0</version>
 
 	<packaging>jar</packaging>
 
@@ -39,8 +39,8 @@
 				<version>3.6.1</version>
 				<configuration>
 					<!-- or whatever version you use -->
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
